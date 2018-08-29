@@ -1,0 +1,75 @@
+$tan: #e6be9f;
+$logo-blue: #3e5a80;
+
+$scheme-purple: #8860d0;
+$scheme-blue: #5680e9;
+$scheme-light-blue: #84ceeb;
+$scheme-sky-blue: #5ab9ea;
+$scheme-gray: #c1c8e4;
+
+
+$gray: #ccc;
+
+$light-green: #6ec496;
+$green: #379e71;
+$dark-green: #2d825d;
+
+$light-blue: #0c8bb7;
+$blue: #08425c;
+$dark-blue: #0c2430;
+
+$red: #990900;
+
+
+
+$brown: #2c2d2d;
+
+$inputRed: #ff8686;
+$inputPink: #cc5353;
+
+$desktop-width: 900px;
+$tablet-width: 600px;
+
+$header-height: 50px;
+
+
+
+@mixin hex ($size, $color, $bg-color) {
+    height: $size * 104px;//104px;
+    width: round($size * 60px);
+    color: $color;
+    background-color: $bg-color;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+
+    &:before {
+        content: "";
+        width: 0; 
+        height: 0;
+        position: absolute;
+        border-left: ($size * 30px) solid $bg-color;
+        border-bottom: ($size * 52px) solid transparent;
+        border-top: ($size * 52px) solid transparent;
+        right: round($size * -30px);
+    }
+
+    &:after {
+        content: "";
+        width: 0;
+        position: absolute;
+        left: round($size * -30px);
+        border-right: ($size * 30px) solid $bg-color;
+        border-bottom: ($size * 52px) solid transparent;
+        border-top: ($size * 52px) solid transparent;
+    }
+
+    span {
+        position: absolute;
+        font-size: $size * 24px;
+        top: $size * 19px;
+        left: $size * -9px;
+        width: 130%;
+        z-index: 10;
+    }
+}

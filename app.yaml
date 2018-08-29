@@ -1,0 +1,38 @@
+api_version: 1
+
+env: standard
+runtime: python27
+service: default
+threadsafe: yes
+
+automatic_scaling:
+  min_idle_instances: 1
+
+handlers:
+
+- url: /(.*\.(css|eot|gz|html|ico|js|map|png|jpg|jpeg|svg|ttf|woff|woff2|pdf))
+  static_files: dist/\1
+  upload: dist/(.*\.(css|eot|gz|html|ico|js|map|png|jpg|jpeg|svg|ttf|woff|woff2|pdf))
+
+- url: /.*
+  static_files: dist/index.html
+  upload: dist/index.html
+  secure: always
+  expiration: "15m"
+
+# Temporary setting to keep gcloud from uploading not required files for deployment
+skip_files:
+- ^node_modules$
+- ^app\.yaml
+- ^app-qa\.yaml
+- ^README\..*
+- \.gitignore
+- ^\.git$
+- ^grunt\.js
+- ^src$
+- ^e2e$
+- \.editorconfig
+- ^karma\.config\.js
+- ^package\.json
+- ^protractor\.conf\.js
+- ^tslint\.json

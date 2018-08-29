@@ -1,0 +1,24 @@
+@import '../../core/vars';
+
+.error-page {
+    padding-top: $header-height+40;
+    padding-bottom: 70px;
+    width: 100%;
+    background-color: $tan;
+    color: #fff;
+
+    h1 {
+        font-size: 70px;
+        line-height: 1px;
+    }
+
+    div {
+        font-size: 20px;
+    }
+
+    .cta {
+        margin-top: 20px;
+        margin-bottom: 0px;
+        width: 200px;
+    }
+}

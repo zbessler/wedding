@@ -1,0 +1,57 @@
+@import '../../core/vars';
+
+label {
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    color: $brown;
+    font-weight: 500;
+    font-size: 14px;
+    z-index: 5;
+    text-transform: capitalize;
+
+    &.touched.error {
+        color: $brown;
+    }
+
+    &.active {
+        color: $scheme-blue;
+    }
+}
+
+input, textarea {
+    color: $brown;
+    margin: 0px auto;
+    margin-bottom: 14px;
+    padding-left: 90px;
+    width: calc(100% - 90px);
+    height: 32px;
+    font-size: 14px;
+    //opacity: .7;
+    border-radius: 5px;
+    border: 1px solid $brown;
+
+
+    &.touched, &:focus {
+        opacity: 1;
+    }
+    &.touched.error {
+        background-color: $inputRed;
+        border: 1px solid $inputRed;
+
+        &::placeholder {
+            color: $inputPink;
+        }
+    }
+}
+
+textarea {
+    height: 100px;
+    padding-top: 7px;
+    margin-bottom: 10px;
+}
+
+.validator-error {
+    margin: -12px auto 0px auto;
+    text-align: left;
+}

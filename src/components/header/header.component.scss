@@ -1,0 +1,136 @@
+@import '../../core/vars';
+
+.nav-bar {
+    height: $header-height;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    z-index: 9997;
+    text-align: left;
+    color: #fff;
+
+    transition: background-color 0.5s ease;
+
+    &.base {
+        background-color: rgba(0,0,0,0);
+        .logo {
+            // background-image: url('../../assets/beam_logo_color.png');
+        }
+
+        @media only screen and (min-width: $desktop-width) {
+            a {
+                color: $brown;
+            }
+        }
+    }
+    &.scrolled, &.static {
+        background-color: $scheme-gray;
+        .logo {
+            // background-image: url('../../assets/beam_logo_white.png');
+            height: 20px;
+            margin-top: 15px;
+        }
+
+         @media only screen and (min-width: $desktop-width) {
+            a {
+                color: $brown;
+            }
+        }
+    }
+
+    .home-text {
+        margin-left: 10px;
+        display: inline-block;
+        margin-top: 14px;
+    }
+
+    .hamburger {
+        margin: 10px;
+        display: inline-block;
+        cursor: pointer;
+        float: right;
+
+        &.scrolled, &.static {
+            .bar1, .bar2, .bar3 {
+                background-color: #fff;
+            }
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 24px;
+            height: 3px;
+            background-color: $brown;
+            margin: 4px 0;
+
+            &.rotated {
+                // display: none;
+            }
+        }
+
+        @media only screen and (min-width: $desktop-width) {
+            display: none;
+        }
+
+    }
+
+    .menu-container {
+        background: $brown;
+        float: right;
+        position: absolute;
+        right: 0;
+        width: 100%;
+        overflow: hidden;
+
+        a {
+            font-size: 22px;
+            display: block;
+            margin: 8px 10px;
+            text-align: right;
+
+            &:hover {
+                padding-right: 3px;
+                color: $dark-green;
+            }
+        }
+
+        @media only screen and (min-width: $desktop-width) {
+            background: none;
+            float: right;
+            visibility: visible !important;
+            height: auto !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            display: inline-block;
+            text-align: right;
+
+            a {
+                display: inline-block;
+                font-size: 15px;
+                line-height: 2;
+                
+                &:hover {
+                    padding-right: 0px;
+                    vertical-align: top;
+                    line-height: 2.3;
+                    color: $dark-green;
+                }
+            }
+        }
+    }
+
+    .menu-screen {
+        height: 1000px;
+        width: 100%;
+        position: relative;
+        z-index: -1;
+
+        &.open {
+            display: block;
+        }
+        &.closed {
+            display: none;
+        }
+    }
+}

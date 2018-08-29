@@ -1,0 +1,143 @@
+<app-header></app-header>
+<a appAnalytics="Header|Click|Help CTA" href="#contact" class="help-btn cta small" *ngIf="scrollType === 'scrolled'">RSVP</a>
+
+<div [ngClass]="['rsvp', openState]" [formGroup]="rsvpForm">
+    <p>Im in for:</p>
+    <div class="checkboxes">
+        <input type="checkbox" id="attJapan" name="attJapan" value="attJapan"  />
+        <label for="attJapan">Japan</label>
+        <input type="checkbox" id="attMaine" name="attJapan" value="attJapan"  />
+        <label for="attMaine">Maine</label>
+        <input type="checkbox" id="attWis" name="attJapan" value="attJapan"  />
+        <label for="attWis">Wisconsin</label>
+    </div>
+    <app-input formControlName="name" [name]="'name'" [field]="rsvpForm.get('name')" placeholder="Jane Doe"></app-input>
+    <app-input formControlName="email" [name]="'email'" [field]="rsvpForm.get('email')" placeholder="jane@email.com"></app-input>
+    <div>
+        <app-input class="guests" formControlName="adultGuests" [name]="'adultPluses'" [field]="rsvpForm.get('adultGuests')"></app-input>
+        <app-input class="guests" formControlName="childGuests" [name]="'childPluses'" [field]="rsvpForm.get('childGuests')"></app-input>
+    </div>
+    <button appAnalytics="Home|Click|Contact Button" class="cta small" (click)="setRsvpState('close')">{{rsvpText}}</button>
+    <div class="validator-error" *ngIf="error">{{error}}</div>
+
+</div>
+
+<!-- ***************************************************************** -->
+<!--                              Hero                                 -->
+<!-- ***************************************************************** -->
+<div class="hero panel" id="home">
+<div class="background0"  [ngStyle]="{'opacity': bg0Opacity}"></div>
+<div class="background1" [ngStyle]="{'opacity': bg1Opacity}"></div>
+<div class="content">
+    <div class="names">Zack + Kristen</div>
+    <div class="breaker">
+        <div class="line"></div>
+        <img class="heart" src="./../assets/icons/heart.svg" />
+        <div class="line"></div>
+    </div>
+    <div class="invite">INVITE YOU</div>
+    <div class="wedding">TO THEIR WEDDING</div>
+    <div class="cele">CELEBRATION</div>
+    <div class="date">4 . 32 . 2018</div>
+    <div class="line long"></div>
+    <button appAnalytics="Home|Click|rsvp" class="cta " (click)="setRsvpState('open')">RSVP</button>
+
+    <!-- <h1 class="introHero" [ngStyle]="{'position': fixedTitle}">Climate change is here</h1> -->
+    <!-- <div class="subtitle" [ngStyle]="{'opacity': bg1Opacity*2, 'position': fixedTitle}">and we're feeling its effects worldwide</div> -->
+</div>
+</div>
+
+
+<!-- ***************************************************************** -->
+<!--                              About                                -->
+<!-- ***************************************************************** -->
+<div class="about panel" id="about">
+<div class="content">
+    <h1 class="header">Who are these crazy kids</h1>
+    <div class="breaker">
+        <div class="line"></div>
+        <img class="heart" src="./../assets/icons/heart.svg" />
+        <div class="line"></div>
+    </div>
+    <div class="zack abouts">
+        <h3>From Zack</h3>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt. Cras semper volutpat venenatis. Duis convallis sollicitudin libero a bibendum. Fusce tristique blandit tortor, a accumsan purus fringilla ac. Nam vehicula rutrum diam eu porttitor.
+    </div>
+    <div class="kristen abouts">
+        <h3>From Kristen</h3>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt. Cras semper volutpat venenatis. Duis convallis sollicitudin libero a bibendum. Fusce tristique blandit tortor, a accumsan purus fringilla ac. Nam vehicula rutrum diam eu porttitor.
+    </div>
+
+    <img class="beating-heart" src="./../assets/hearts/heartBeat.gif" />
+</div>
+</div>
+
+<!-- ***************************************************************** -->
+<!--                             Photos                                -->
+<!-- ***************************************************************** -->
+<div class="photos panel" id="photos">
+<div class="content">
+    <h1>Photos</h1>
+    <div class="breaker">
+        <div class="line"></div>
+        <img class="heart" src="./../assets/icons/heart.svg" />
+        <div class="line"></div>
+    </div>
+    <div class="content-carousel">
+        <app-carousel moveToSlide="1"></app-carousel>
+    </div>
+</div>
+</div>
+
+
+<!-- ***************************************************************** -->
+<!--                              Details                              -->
+<!-- ***************************************************************** -->
+<div class="details panel" id="details">
+<div class="content">
+
+    <h1 class="introText">The Details</h1>
+    <div class="breaker">
+        <div class="line"></div>
+        <img class="heart" src="./../assets/icons/heart.svg" />
+        <div class="line"></div>
+    </div>
+
+
+    <div class="info-card">
+        <h2>What is this</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+        </p>
+    </div>
+    <div class="info-card">
+        <h2>Where is this</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+        </p>
+    </div>
+    <div class="info-card">
+        <h2>When is this</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+        </p>
+    </div>
+    <div class="info-card">
+        <h2>Need Help?</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h2>Gifts</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+        </p>
+    </div>
+    
+</div>
+</div>
+
+<app-footer></app-footer>
+

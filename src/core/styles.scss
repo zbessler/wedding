@@ -1,0 +1,203 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'vars';
+
+body, app-root {
+    margin: 0;
+    padding: 0;
+    background-color: $gray;
+    color: $brown;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    -webkit-overflow-scrolling: touch;
+
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.link {
+    text-decoration: underline;
+    color: #6ec496;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.desktop-only {
+    display: none !important;
+
+    @media only screen and (min-width: $desktop-width) {
+        display: initial !important;
+    }
+}
+
+.mobile-only {
+    @media only screen and (min-width: $desktop-width) {
+        display: none !important;
+    }
+}
+
+.strong {
+    font-weight: 900;
+}
+
+.Oswald {
+    font-family: 'Oswald', sans-serif;
+}
+
+
+.cta {
+    background-color: $scheme-purple;
+    font-size: 25px;
+    border-radius: 7px;
+    padding: 10px 30px;
+    cursor: pointer;
+    border: none;
+    color: $brown;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+
+    &:hover {
+        background-color: lighten($scheme-purple, 10%)
+    }
+
+    &:active {
+        background-color: lighten($scheme-purple, 5%)
+    }
+
+    &.small {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    &.help {
+        border-radius: 9999px;
+        font-size: 9px;
+        padding: 0px 5px;
+        background-color: $gray;
+    }
+}
+
+.validator-error {
+    color: #ff6363;
+    font-size: 10px;
+    margin: 2px auto -14px auto;
+}
+
+.panel {
+    margin: 0px auto;
+    font-size: 18px;
+    position: relative;
+    z-index: 2;
+
+
+    .content {
+        width: 100%
+    }
+    @media only screen and (min-width: $desktop-width) {
+        .content {
+            width: 900px;
+            margin: auto;
+        }
+    }
+}
+
+.accordion {
+    margin-bottom: 3px;
+
+    &:last-child {
+        margin-bottom: 0px;
+    }
+
+    .accordion-bar {
+        background-color: $green;
+        width: 100%;
+        padding: 10px 0px;
+        position: relative;
+    }
+
+    .arrow-down {
+        width: 20px;
+        float: right;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+    .body {
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.15);
+        border-radius: 0px 0px 3px 3px;
+        background-size: cover;
+    }
+
+    @media only screen and (min-width: $desktop-width) {
+        width: 740px;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: left;
+        margin-bottom: 6px;
+
+        .accordion-bar {
+            width: initial;
+            padding-left: 20px;
+        }
+    }
+}
+
+
+.form-table {
+    border-top: 10px solid $green;
+    background-color: #fff;
+    padding-bottom: 30px;
+    width: 90%;
+    margin: auto;
+
+    .subtext {
+        width: 301px;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    .field {
+        display: inline-block;
+        margin: 3px auto;
+        width: 85%;
+    }
+
+    @media only screen and (min-width: 460px) {
+        width: 80%;
+    }
+
+    @media only screen and (min-width: 600px) {
+        padding-top: 0px; 
+        padding-bottom: 50px;
+        margin: 70px auto 50px auto;
+        z-index: 0;
+        display: inline-block;
+        width: 550px;
+        border-radius: 7px;
+
+        .field, .subtext {
+            width: 300px;
+        }
+    }
+
+    @media only screen and (min-width: $desktop-width) {
+        width: 700px;
+
+        .field, .subtext {
+            width: 500px;
+        }
+    }
+}

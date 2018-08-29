@@ -1,0 +1,37 @@
+<label [ngClass]="{error: error, touched: touched, active: active}">{{name}}</label>
+
+<input *ngIf="type !== 'textarea'" 
+        [ngModel]="data" 
+        (ngModelChange)="onChange($event)" 
+        (blur)="onBlur($event)"
+        (focusin)="onFocus($event)"
+        [ngClass]="{error: error, touched: touched}" 
+        type="{{type}}" 
+        [placeholder]=placeholder />
+<textarea *ngIf="type === 'textarea'" 
+        [ngModel]="data" 
+        (ngModelChange)="onChange($event)" 
+        (blur)="onBlur($event)" 
+        (focusin)="onFocus($event)"
+        [ngClass]="{error: error, touched: touched}" 
+        placeholder={{placeholder}}>
+</textarea>
+
+<p class="validator-error" *ngIf="field.hasError('required') && field.touched && !customMessage">
+    Please provide a valid {{name}}
+</p>
+<div class="validator-error" *ngIf="field.hasError('minlength') && field.touched && !customMessage">
+    Please enter a valid {{name}} {{field.getError('minlength').requiredLength}} characters or longer
+</div>
+<p class="validator-error" *ngIf="field.hasError('maxlength') && field.touched && !customMessage">
+    Please enter a valid {{name}} shorter than {{field.getError('maxlength').requiredLength}} characters
+</p>
+<p class="validator-error" *ngIf="field.hasError('email') && field.touched && !field.hasError('required') && !customMessage">
+    Please enter a valid email address
+</p>
+<p class="validator-error" *ngIf="field.hasError('MatchPassword') && field.touched && !customMessage">
+    Your passwords do not match
+</p>
+<p class="validator-error" *ngIf="field.errors && field.touched && customMessage">
+    {{customMessage}}
+</p>

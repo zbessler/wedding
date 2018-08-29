@@ -1,0 +1,15 @@
+<div [ngClass]="['nav-bar', type]">
+    <a appAnalytics="Header|Click|Logo" routerLink="/" class="home-text">The B & B Wedding</a>
+
+    <div appAnalytics="Header|Click|Hamburger" [ngClass]="['hamburger', type]" (click)="toggleMenu()">
+        <div [@rotatedRight]="menuState" class="bar1"></div>
+        <div [@rotatedMiddle]="menuState" [ngClass]="['bar2', menuState]"></div>
+        <div [@rotatedLeft]="menuState" class="bar3"></div>
+    </div>
+
+    <div class="menu-container"  [@showMenu]="menuState">
+        <a appAnalytics="Header|Click|Home" (click)="toggleMenu()" routerLink="/">Home</a>
+        <a appAnalytics="Header|Click|Japan" (click)="toggleMenu()" routerLink="/japan">Japan</a>
+    </div>
+    <div appAnalytics="Header|Click|Out Of Menu" (click)="toggleMenu()" [ngClass]="['menu-screen', menuState]"></div>
+</div>
