@@ -1,0 +1,101 @@
+@import '../../core/vars';
+
+.breaker {
+    .heart {
+        width: 30px;
+    }
+    .line {
+        height: 2px;
+        border-top: 1px solid $text-dark;
+        border-bottom: 1px solid $text-dark;
+        display: inline-block;
+        width: 100px;
+        margin-bottom: 10px;
+
+        &.long {
+            display: inline-block;
+            width: 250px;
+            margin-top: 15px
+        }
+    }
+}
+
+.hero {
+    padding-top: ($header-height + 100px);
+    padding-bottom: 100px;
+    color: $text-dark;
+    min-height: 400px;
+    background-color: $backdrop-light;
+
+    .background0 {
+        position: absolute;
+        background-position: top;
+        background-size: cover;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+    }
+    .background0 {
+        background-image: url('../../assets/photos/2.jpg');
+        @media only screen and (min-width: $desktop-width) {
+        }
+    }
+}
+
+.about {
+    padding-top: 35px;
+    padding-bottom: 0px;
+    background-color: $primary-dark;
+    color: $text-light;
+
+    @media only screen and (min-width: $desktop-width) {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .abouts {
+        width: 85%;
+        display: inline-block;
+        margin: auto 20px;
+        text-align: left;
+
+        h3 {
+            text-align: center;
+        }
+
+
+    }
+     @media only screen and (min-width: $desktop-width) {
+        .totals {
+            width: 20%;
+        }
+
+        .list {
+            width: 60%;
+            vertical-align: top;
+        }
+    }
+
+    .beating-heart {
+        width: 200px;
+        border-radius: 9999px;
+    }
+
+
+    table {
+        width: 100%;
+        margin-bottom: 30px;
+    } 
+    .filter {
+        width: 100%;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+
+    .mat-cell, .mat-header-cell {
+        padding: 0px 10px;
+    }
+}
+
