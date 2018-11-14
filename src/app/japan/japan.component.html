@@ -1,192 +1,32 @@
 <app-header></app-header>
 
-<div class="hex-area">
-    <div class="hex-row">
-        <span class="bg-hex" [@raiseHex]="hexCountNorm[0]"></span>
-        <span class="bg-hex" [@raiseHexOffset]="hexCountOffset[0]"></span>
-        <span class="bg-hex" [@raiseHex]="hexCountNorm[1]"></span>
-        <span class="bg-hex" [@raiseHexOffset]="hexCountOffset[1]"></span>
-        <span class="bg-hex" [@raiseHex]="hexCountNorm[2]"></span>
-        <span class="bg-hex" [@raiseHexOffset]="hexCountOffset[2]"></span>
-        <span class="bg-hex" [@raiseHex]="hexCountNorm[3]"></span>
-        <span class="bg-hex" [@raiseHexOffset]="hexCountOffset[3]"></span>
-    </div>
-    <div class="hex-row">
-        <span class="bg-hex" [@raiseHex]="hexCountNorm[4]"></span>
-        <span class="bg-hex" [@raiseHexOffset]="hexCountOffset[4]"></span>
-        <span class="bg-hex" [@raiseHex]="hexCountNorm[5]"></span>
-        <span class="bg-hex" [@raiseHexOffset]="hexCountOffset[5]"></span>
-        <span class="bg-hex" [@raiseHex]="hexCountNorm[6]"></span>
-        <span class="bg-hex" [@raiseHexOffset]="hexCountOffset[6]"></span>
-        <span class="bg-hex" [@raiseHex]="hexCountNorm[7]"></span>
-        <span class="bg-hex" [@raiseHexOffset]="hexCountOffset[7]"></span>
-    </div>
-</div>
 
 <div class="hero panel" id="home">
 <div class="content">
-    <h1 class="intro">Introducing</h1>
-    <img class="logo" src="../../assets/beam_text_white.png" />
+    <h1 class="intro">JAPAN</h1>
     <div class="subtitle">
-        A blockchain-powered crowdfunding marketplace for cleantech startups
-    </div>
-    <div class="btn-holder">
-        <button appAnalytics="Home|Click|Visit Dashboard"  *ngIf="loggedIn" class="cta tokens" routerLink="/dashboard">Visit Dashboard</button>
-        <button appAnalytics="Home|Click|Signup" *ngIf="!loggedIn" class="cta tokens" routerLink="/signup">Sign up</button>
-        <a appAnalytics="Home|Click|Whitepaper" class="cta whitepaper" href="../../assets/BeamWhitePaper.pdf" target="_blank">Get Whitepaper</a>
+        We are so happy you want to join us
     </div>
 </div>
 </div>
 
 <div class="about panel" id="about">
 <div class="content">
-    <h1 class="header">Climate Change is Here</h1>
+    <h1 class="header">Coming Soon</h1>
     <div class="text">
-        Beam is a platform tailored to empower those who want to invest in a low carbon, clean energy future,
-        and the cleantech startups with the ideas to enable that future. Beam is based on the transparent and
-        decentralized Ethereum blockchain, powered by tokens and governed by uniquely customizable smart contracts.
+        This page will be filled with important infomation infomation pertaining to both our wedding as well as what you should do while you are in Japan.  Remember, its a wedding we wont be able to spend much individual time with you so plan for lots of amazing Japanese adventures! 
     </div>
-    <div *ngFor="let acc of accordianData; let i = index" class="accordion">
+<!--     <div *ngFor="let acc of accordianData; let i = index" class="accordion">
         <div appAnalytics="Home|Click|Accordian {{state[i]}}|{{i}}" class="accordion-bar" (click)="openAccordion(i)">
             {{acc.title}}
             <img [@rotatedState]="state[i]" class="arrow-down" src="../../assets/icon_carrot.png" />
         </div>
         <div class="body" [@openState]="state[i]" [innerHTML]="acc.body">
         </div>  
-    </div>
+    </div> -->
 </div>
 </div>
 
-<div class="projects panel" id="projects">
-<div class="content-carousel">
-    <h1 class="mobile">Projects</h1>
-    <app-carousel moveToSlide="1"></app-carousel>
-</div>
-</div>
-
-<div class="carbon panel" id="carbon">
-<div class="content">
-    <h1 class="mobile-only">Carbon Offset Incentive</h1>
-    <img class="img-flow" src="../../assets/carbon/flow.png" />
-    <div class="text">
-        <h1 class="desktop-only">Carbon Offset Incentive</h1>
-        <p class="strong">Offset your personal CO2 emissions while earning Beam</p>
-        <p>
-            Beam's carbon offset system works like a rewards program - the more offsets you buy, the more BEAM 
-            Tokens you can earn- tokens that can be freely used across the platform to invest.  
-            You'll be able to track your earnings and redemptions on your user dashboard.
-        </p>
-        <button appAnalytics="Home|Click|Carbon Learn More" class="cta tokens" routerLink="/carbon">Learn More</button>
-    </div>
-</div>
-</div>
-
-<div class="token panel" id="token">
-<div class="content">
-    <h1 class="header">Token Details</h1>
-    <p class="text">
-        Beam is powered by ethereum-based smart tokens, or BEAM Tokens, which act as carriers 
-        for equity crowdfunding 'smart contracts'.
-    </p>
-    <p>
-        To invest in a startup, users make a contribution 
-        in BEAM as a way to interact with the smart contract for the crowdfund. By doing so, Beam ensures 
-        your contribution is only made if the crowdfund is successful, and is tracked as part of the 
-        startup's community of investors - no matter where you are or what amount you contribute.
-    </p>
-    <p> 
-        In short, Beam tokens ensure that user funds are invested automatically and transparently. 
-        For more on our tokens, see our white paper. 
-    </p>
-
-    <h1 class="header sale">Sale Details</h1>
-    <p class="text">
-        To kickstart the crowdfunding platform, Beam will hold a token sale, allowing individuals to 
-        purchase Beam Tokens during the sale in exchange for Ether (ETH). Sign up 
-        <a appAnalytics="Home|Click|Sign up above" class="link" href="#home">above</a> for email updates 
-        for more information on the Token sale.
-    </p>
-</div>
-</div>
-
-<div [ngClass]="{'roadmap': true, 'panel': true, 'extended': seeAll}" id="roadmap">
-<div class="content">
-
-    <h1 class="header">Roadmap</h1>
-
-    <div class="timeline"></div>
-    <div class="start-dot"></div>
-
-    <div *ngFor="let r of roadmapData; let i = index" beamAnimateOnScroll="fadeIn">
-        <div *ngIf="r.type === 'DATE'" class="hex" beamAnimateOnScroll="fadeIn" offset="200">
-            <span>{{r.line1}}<br />{{r.line2}}</span>
-        </div>
-
-        <div *ngIf="r.type === 'MILESTONE' && !r.side" class="node" beamAnimateOnScroll="fadeIn" offset="200">
-            <span class="hex-small"></span>
-
-            <div class="line"></div>
-            <div class="line-holder"></div>
-            <div class="content">
-                <div class="node-header">{{r.header}}</div>
-                <div class="node-body">{{r.body}}</div>
-            </div>  
-        </div>
-
-        <div *ngIf="r.type === 'MILESTONE' && r.side" class="node left" beamAnimateOnScroll="fadeIn" offset="200">
-            <div class="content">
-                <div class="node-header">{{r.header}}</div>
-                <div class="node-body">{{r.body}}</div>
-            </div>  
-            <div class="line-holder"></div>
-            <div class="line"></div>
-            <span class="hex-small"></span>
-        </div>
-
-    </div>
-
-    <button appAnalytics="Home|Click|Roadmap Learn More" [ngClass]="{'cta': true, 'extended': seeAll}" (click)="toggleSeeAll()">{{seeAllBtnTxt}}</button>
-    <div [ngClass]="{'bottom-fade': true, 'extended': seeAll}"></div>
-
-</div>
-</div>
-
-<!-- 
-<div class="contact panel" id="contact">
-<div class="content" [formGroup]="contactForm">
-    <h1>Contact Us</h1>
-    <app-input formControlName="name" [name]="'name'" [field]="contactForm.get('name')" placeholder="Jane Doe"></app-input>
-    <app-input formControlName="email" [name]="'email'" [field]="contactForm.get('email')" placeholder="jane@email.com"></app-input>
-    <app-input formControlName="subject" [name]="'subject'" [field]="contactForm.get('subject')"></app-input>
-    <app-input formControlName="message" [name]="'message'" [field]="contactForm.get('message')" type="textarea" class="textarea"></app-input>
-    <button appAnalytics="Home|Click|Contact Button" class="cta" (click)="sendMessage()">{{sendBtnText}}</button>
-    <div class="validator-error" *ngIf="error">{{error}}</div>
-</div>
-</div>
- -->
-
-<div class="team panel" id="team">
-<div class="content">
-
-    <h1>The Beam Team</h1>
-    <div class="subtitle">A unique blend of talent and experience</div>
-    <div class="members">
-        <div *ngFor="let member of team" class="member">
-            <img class="headshot" [src]="member.img" />
-            <a class="name" href="{{member.linkedin}}" target="_blank">{{member.name}}</a>
-            <!-- <div class="name">{{member.name}}</div> -->
-            <div class="title">{{member.title}}</div>
-        </div>
-        <!-- the last block in this set is hidden, I'm sorry, this gives the last object correct spacing -->
-        <div class="member">
-            <img class="headshot" />
-            <div class="name"></div>
-            <div class="title"></div>
-        </div>
-    </div>
-
-</div>
-</div>
 
 <app-footer></app-footer>
 

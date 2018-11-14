@@ -1,6 +1,14 @@
-<label [ngClass]="{error: error, touched: touched, active: active}">{{name}}</label>
-
+<mat-form-field class="field">
+<!--     <input matInput 
+        placeholder="{{placeholder}}"
+        [ngModel]="data" 
+        (blur)="onBlur($event)"
+        (focusin)="onFocus($event)"
+        [ngClass]="{error: error, touched: touched}" 
+           /> -->
+    
 <input *ngIf="type !== 'textarea'" 
+        matInput
         [ngModel]="data" 
         (ngModelChange)="onChange($event)" 
         (blur)="onBlur($event)"
@@ -9,6 +17,7 @@
         type="{{type}}" 
         [placeholder]=placeholder />
 <textarea *ngIf="type === 'textarea'" 
+        matInput
         [ngModel]="data" 
         (ngModelChange)="onChange($event)" 
         (blur)="onBlur($event)" 
@@ -17,21 +26,22 @@
         placeholder={{placeholder}}>
 </textarea>
 
-<p class="validator-error" *ngIf="field.hasError('required') && field.touched && !customMessage">
-    Please provide a valid {{name}}
-</p>
-<div class="validator-error" *ngIf="field.hasError('minlength') && field.touched && !customMessage">
-    Please enter a valid {{name}} {{field.getError('minlength').requiredLength}} characters or longer
-</div>
-<p class="validator-error" *ngIf="field.hasError('maxlength') && field.touched && !customMessage">
-    Please enter a valid {{name}} shorter than {{field.getError('maxlength').requiredLength}} characters
-</p>
-<p class="validator-error" *ngIf="field.hasError('email') && field.touched && !field.hasError('required') && !customMessage">
-    Please enter a valid email address
-</p>
-<p class="validator-error" *ngIf="field.hasError('MatchPassword') && field.touched && !customMessage">
-    Your passwords do not match
-</p>
-<p class="validator-error" *ngIf="field.errors && field.touched && customMessage">
-    {{customMessage}}
-</p>
+    <mat-error *ngIf="field.hasError('required') && field.touched">
+        Please provide a valid {{name}}
+    </mat-error>
+    <mat-error *ngIf="field.hasError('minlength') && field.touched">
+        Please enter a valid {{name}} {{field.getError('minlength').requiredLength}} characters or longer
+    </mat-error>
+    <mat-error *ngIf="field.hasError('maxlength') && field.touched && !customMessage">
+        Please enter a valid {{name}} shorter than {{field.getError('maxlength').requiredLength}} characters
+    </mat-error>
+    <mat-error *ngIf="field.hasError('email') && field.touched && !field.hasError('required') && !customMessage">
+        Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="field.hasError('MatchPassword') && field.touched && !customMessage">
+        Your passwords do not match
+    </mat-error>
+    <mat-error *ngIf="field.errors && field.touched && customMessage">
+        {{customMessage}}
+    </mat-error>
+</mat-form-field>

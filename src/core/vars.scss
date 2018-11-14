@@ -1,28 +1,64 @@
-$tan: #e6be9f;
-$logo-blue: #3e5a80;
+@import '~@angular/material/theming';
 
-$scheme-purple: #8860d0;
-$scheme-blue: #5680e9;
-$scheme-light-blue: #84ceeb;
-$scheme-sky-blue: #5ab9ea;
-$scheme-gray: #c1c8e4;
+$primaryMat: mat-palette($mat-deep-purple, 700, 300, 900);
+$backdrops: mat-palette($mat-blue-gray, 200, 400, 600);
+$accentMat: mat-palette($mat-teal, A200, A100, A400);
+$warn: mat-palette($mat-deep-orange, 900);
+
+$my-theme: mat-light-theme(
+    $primaryMat,
+    $accentMat,
+    $warn
+);
 
 
-$gray: #ccc;
 
-$light-green: #6ec496;
-$green: #379e71;
-$dark-green: #2d825d;
+// $primary: mat-color($primaryMat, lighter);
+// $primary-light: mat-color($primaryMat, lighter);
+// $primary-dark: mat-color($primaryMat, darker);
 
-$light-blue: #0c8bb7;
-$blue: #08425c;
-$dark-blue: #0c2430;
+// $accent: mat-color($accentMat);
+// $accent-light: mat-color($accentMat, lighter);
+// $accent-dark: mat-color($accentMat, darker);
+
+
+$primary: #b39bc8;
+$primary-light: lighten($primary, 10%);
+$primary-dark: darken($primary, 10%);
+
+$accent: #f172a1;
+$accent-light: lighten($accent, 10%);
+$accent-dark: darken($accent, 10%);
+
+
+
+$tan-heart: #e6be9f;
+$blue-heart: #3e5a80;
+
+// $scheme-light-blue: #84ceeb;
+// $scheme-sky-blue: #5ab9ea;
+// $scheme-gray: #c1c8e4;
+
+
+
+$backdrop-light: #ccc;
+$backdrop-dark: #2c2d2d;
+
+
+$text-light: lighten($backdrop-light, 10%);
+$text-dark: $backdrop-dark;
+
+
+// $light-green: #6ec496;
+// $green: #379e71;
+// $dark-green: #2d825d;
+
+// $light-blue: #0c8bb7;
+// $blue: #08425c;
+// $dark-blue: #0c2430;
 
 $red: #990900;
 
-
-
-$brown: #2c2d2d;
 
 $inputRed: #ff8686;
 $inputPink: #cc5353;

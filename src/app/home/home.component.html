@@ -1,26 +1,71 @@
 <app-header></app-header>
-<a appAnalytics="Header|Click|Help CTA" href="#contact" class="help-btn cta small" *ngIf="scrollType === 'scrolled'">RSVP</a>
+<a appAnalytics="Header|Click|RSVP} CTA" class="rsvp-header-btn cta small" *ngIf="scrollType === 'scrolled'" (click)="toggleRsvp()">RSVP</a>
 
-<div [ngClass]="['rsvp', openState]" [formGroup]="rsvpForm">
-    <p>Im in for:</p>
-    <div class="checkboxes">
-        <input type="checkbox" id="attJapan" name="attJapan" value="attJapan"  />
-        <label for="attJapan">Japan</label>
-        <input type="checkbox" id="attMaine" name="attJapan" value="attJapan"  />
-        <label for="attMaine">Maine</label>
-        <input type="checkbox" id="attWis" name="attJapan" value="attJapan"  />
-        <label for="attWis">Wisconsin</label>
-    </div>
-    <app-input formControlName="name" [name]="'name'" [field]="rsvpForm.get('name')" placeholder="Jane Doe"></app-input>
-    <app-input formControlName="email" [name]="'email'" [field]="rsvpForm.get('email')" placeholder="jane@email.com"></app-input>
+<mat-card [ngClass]="{rsvp: true, open: openState}" [formGroup]="rsvpForm">
+    <div class="close-btn" (click)="toggleRsvp()">X</div>
+    <p>I will attend:</p>
+     <mat-button-toggle-group class="buttons" multiple #group="matButtonToggleGroup" formControlName="attending">
+        <mat-button-toggle value="japan" name="attJapan">Japan</mat-button-toggle>
+        <mat-button-toggle value="maine" name="attMaine">Maine</mat-button-toggle>
+        <mat-button-toggle value="wis" name="attWis">Wisconsin</mat-button-toggle>
+
+    </mat-button-toggle-group>
+    <mat-error class="validator-error" *ngIf="rsvpForm.get('attending').hasError('required') && rsvpForm.get('attending').dirty">
+        You have to pick one.
+    </mat-error>
+
+    <mat-form-field class="field">
+        <input matInput formControlName="name" placeholder="Your Name" />
+        <mat-error *ngIf="rsvpForm.get('name').hasError('required')">
+            Please provide your name.
+        </mat-error>
+        <mat-error *ngIf="rsvpForm.get('name').hasError('maxlength')">
+            Wow thats a really long name! Lets try to make it shorter.
+        </mat-error>
+        <mat-error *ngIf="rsvpForm.get('name').hasError('minlength')">
+            Is that your whole name?  Enter the your full name!
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+        <input matInput formControlName="email" placeholder="Your Email" />
+        <mat-error *ngIf="rsvpForm.get('email').hasError('required') || rsvpForm.get('email').hasError('email')">
+            Please provide a valid email.
+        </mat-error>
+    </mat-form-field>
     <div>
-        <app-input class="guests" formControlName="adultGuests" [name]="'adultPluses'" [field]="rsvpForm.get('adultGuests')"></app-input>
-        <app-input class="guests" formControlName="childGuests" [name]="'childPluses'" [field]="rsvpForm.get('childGuests')"></app-input>
+        <mat-form-field class="field guests">
+            <input matInput formControlName="adults" placeholder="Total Adults" />
+            <mat-error *ngIf="rsvpForm.get('adults').hasError('required')">
+                Please enter the total number of adults.
+            </mat-error>
+            <mat-error *ngIf="rsvpForm.get('adults').hasError('max')">
+                That seems like a lot, try again.
+            </mat-error>
+            <mat-error *ngIf="rsvpForm.get('adults').hasError('min')">
+                No adults are attending? Why RSVP?
+            </mat-error>
+            <mat-error *ngIf="rsvpForm.get('adults').hasError('pattern')">
+                What does "{{rsvpForm.get('adults').value}} adults" mean?
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="field guests">
+            <input matInput formControlName="children" placeholder="Total Children" />
+            <mat-error *ngIf="rsvpForm.get('children').hasError('required')">
+                Please provide the total number of children attending.
+            </mat-error>
+            <mat-error *ngIf="rsvpForm.get('children').hasError('max')">
+                Are you sure you're allowed to bring that many?
+            </mat-error>
+            <mat-error *ngIf="rsvpForm.get('children').hasError('min')">
+                Negative children!?
+            </mat-error>
+            <mat-error *ngIf="rsvpForm.get('children').hasError('pattern') && !rsvpForm.get('children').hasError('min')">
+                What does "{{rsvpForm.get('children').value}} children" mean?
+            </mat-error>
+        </mat-form-field>
     </div>
-    <button appAnalytics="Home|Click|Contact Button" class="cta small" (click)="setRsvpState('close')">{{rsvpText}}</button>
-    <div class="validator-error" *ngIf="error">{{error}}</div>
-
-</div>
+    <button appAnalytics="Home|Click|Send RSVP Button" class="cta small" (click)="sendForm()">{{rsvpText}}</button>
+</mat-card>
 
 <!-- ***************************************************************** -->
 <!--                              Hero                                 -->
@@ -38,9 +83,10 @@
     <div class="invite">INVITE YOU</div>
     <div class="wedding">TO THEIR WEDDING</div>
     <div class="cele">CELEBRATION</div>
-    <div class="date">4 . 32 . 2018</div>
+    <div class="date">April 2019</div>
     <div class="line long"></div>
-    <button appAnalytics="Home|Click|rsvp" class="cta " (click)="setRsvpState('open')">RSVP</button>
+    <button appAnalytics="Home|Click|rsvp" class="cta " (click)="toggleRsvp()">RSVP</button>
+
 
     <!-- <h1 class="introHero" [ngStyle]="{'position': fixedTitle}">Climate change is here</h1> -->
     <!-- <div class="subtitle" [ngStyle]="{'opacity': bg1Opacity*2, 'position': fixedTitle}">and we're feeling its effects worldwide</div> -->
@@ -61,11 +107,38 @@
     </div>
     <div class="zack abouts">
         <h3>From Zack</h3>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt. Cras semper volutpat venenatis. Duis convallis sollicitudin libero a bibendum. Fusce tristique blandit tortor, a accumsan purus fringilla ac. Nam vehicula rutrum diam eu porttitor.
+        <p>
+            I am so excited that you are looking at our website.  That probably means you are someone we like.  Something I'm even more excited about is to marry Kristen.  We met one dark night in our favorite Whiskey bar.  It was here that I won her over with my tales of cooking.  
+        </p>
+        <p>
+            It was only a short time later when she looked at me and said, "I think you should know, I accepted a fellowship in Orlando."  I didn't know what to say, I was lost for works.  I thought to myself, "What's a fellowship?"
+        </p>
+        <p>
+            Time zoomed on and I found myself in Florida standing 3 miles from a spaceship having a serious thought, "If this spaceship blows up should I try to pull her under this bleacher or just shield her with my body. She would be really valuable in the aftermath".  
+        <p>
+            Something like 6 months and 40 hours later we arrived in the extra smokey mountains of the Pacific North West.  
+        </p>
+        <p>
+            Life is weird.
+        </p>
     </div>
     <div class="kristen abouts">
         <h3>From Kristen</h3>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt. Cras semper volutpat venenatis. Duis convallis sollicitudin libero a bibendum. Fusce tristique blandit tortor, a accumsan purus fringilla ac. Nam vehicula rutrum diam eu porttitor.
+        <p>
+            Many of you know Zack and I have been committed to each other for the past two years. Our meet cute included a long walk with a different man, a beer tent sign, two cocktails and discovering the definition of sapiophile. Several days later, our very first date ended with discussing deal breakers…”Not believing in science”...I am certain it did not take Zack long to figure out I did not have any issues with that requirement. If anything, he should have been concerned about my “left-brained” tendencies.
+        </p>
+        <p>
+            The decade prior to meeting Zack, I have worked very hard at balancing the left and right brain dominance. Many of you reading this website have played a VERY important role in developing my emotional intelligence and I am forever grateful to you. What I struggled the most with during this time was the brain and heart connection. 
+        </p>
+        <!-- <p>
+            Throughout the years I have asked many of you the meaning of love… was it just a neurochemical release, a sense of support or dependency of another individual, did love go beyond physical attraction. What I discovered just before meeting Zack was that an individual has to truly believe they are capable of being loved before they are able to love others beyond just caring for them.
+        </p> -->
+        <p>
+            Zack has many traits and qualities that make him an amazing life partner; great listener, compassionate, an amazing chef and mixologist, family and friend focused, world traveler. All things that I discovered on our very first date that lingered into the late hours. Ultimately, PATIENCE is Zack’s #1 quality that I am most appreciative of.
+        </p>
+        <p>
+            I want to thank you for all your love and support that you have given me. To Zack’s friends and family, thank you for influencing his character that I heavily rely upon. All of you mean so much to both of us and we look forward to continuing to include you in our life’s journey. 
+        </p>
     </div>
 
     <img class="beating-heart" src="./../assets/hearts/heartBeat.gif" />
@@ -77,7 +150,7 @@
 <!-- ***************************************************************** -->
 <div class="photos panel" id="photos">
 <div class="content">
-    <h1>Photos</h1>
+    <h1 class="header">Photos</h1>
     <div class="breaker">
         <div class="line"></div>
         <img class="heart" src="./../assets/icons/heart.svg" />
@@ -104,37 +177,63 @@
     </div>
 
 
-    <div class="info-card">
+    <mat-card class="info-card">
         <h2>What is this</h2>
+        <h3>Please read!</h3>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+            Here is the deal. We are going to Japan to have a small ceremony. We would love for you to come, if you want to. We know this is a little crazy and it’s just something we really want to do. If you can't come, know that we <strong>won't</strong> be upset.
         </p>
-    </div>
-    <div class="info-card">
-        <h2>Where is this</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+            If you really want to help celebrate and can't go to Japan don't fret. We are planning small celebrations this summer in Wisconsin and Maine. If you cannot come to ANY of them, well, then we might get upset.
         </p>
-    </div>
-    <div class="info-card">
+        <p>
+            If you are planning to go to Japan please check the <a appAnalytics="Header|Click|Japan" routerLink="/japan">Japan page</a> for more details. There are many things you should know before booking your trip out there.
+            
+        </p>
+    </mat-card>
+    <mat-card class="info-card">
         <h2>When is this</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+            We are going to get married in April of 2019, MARK YOUR CALENDARS. This will be updated with more specific dates of when we will be flying in and where we will be staying on the <a appAnalytics="Header|Click|Japan" routerLink="/japan">Japan page</a> . Be sure to RSVP for Japan if you want to be updated as plans get made.
         </p>
-    </div>
-    <div class="info-card">
+        <p>
+            The plans for Maine and Wisconsin have not been finalized yet. Both will be summer 2019 and Wisconsin will be early June. If you have RSVP'd for either of those events you will be hearing more from us and this website will be updated when we have more information.
+        </p>
+    </mat-card>
+    <mat-card class="info-card">
+        <h2>Where is this</h2>
+        <p>
+            This is several places, isn't that fun?
+        </p>
+        <p>
+            We are having the "Main" ceremony in Japan. It will be something small. We will likely try to reserve a Ryokan where we can all stay for a day or two. (Additionally, for anyone who is interested, we would like to spend a few days with everyone in Tokyo.)
+        </p>
+        <p>
+            If you are planning to attend summer receptions, they will be near Edgar, Wisconsin and Lyman, Maine.
+        </p>
+    </mat-card>
+    <mat-card class="info-card">
         <h2>Need Help?</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+            If you have any questions feel free to reach out to us in whatever way you typically do. If you have any concerns about how to plan a trip twelve zone away, visit the <a appAnalytics="Header|Click|Japan" routerLink="/japan">Japan page</a> to learn more about what to expect. If there are questions about the summer celebrations, more details will be coming soon.
         </p>
-    </div>
+    </mat-card>
 
-    <div class="info-card">
+    <mat-card class="info-card">
         <h2>Gifts</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien id neque pretium placerat eu vel eros. Morbi fringilla nulla sed nulla gravida, quis pulvinar erat tincidunt.
+            We are not stuff people. 
         </p>
-    </div>
+        <p>
+            We would like you to spend any gift money on traveling to spend time with us no matter the location. If there are still strong desires to gift us something, please consider donating to the below organizations.
+        </p>
+        <ul class="donation-list">
+            <li>Coming Soon</li>
+        </ul>
+        <p>
+            If you're still wanting to gift something and not interested in the above amazing options, consider looking at a future Amazon gift list, also coming soon, maybe. 
+        </p>
+    </mat-card> 
     
 </div>
 </div>

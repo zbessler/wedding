@@ -12,7 +12,6 @@ export class ErrorComponent {
 
 
     public back(): void {
-        console.log();
         this._location.back();
     }
 

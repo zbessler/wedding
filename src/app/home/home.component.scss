@@ -1,87 +1,81 @@
 @import '../../core/vars';
 
-.help-btn {
+.rsvp-header-btn {
     position: fixed;
     top: 0;
     z-index: 9998;
     right: calc(50% - 98px + 36px);
     padding: 7px 10px;
-    margin-top: 8px;
+    margin-top: 7px;
     @media only screen and (min-width: $desktop-width) {
         right: 260px;
     }
 }
-.breaker {
-    .heart {
-        width: 30px;
-    }
-    .line {
-        height: 2px;
-        border-top: 1px solid $brown;
-        border-bottom: 1px solid $brown;
-        display: inline-block;
-        width: 100px;
-        margin-bottom: 10px;
 
-        &.long {
-            display: inline-block;
-            width: 250px;
-            margin-top: 15px
-        }
-    }
-}
 
 .rsvp {
-    background-color: $scheme-blue;
-    color: #fff;
+    background-color: $primary-light;
+    box-shadow: 0 0 5px 10px $primary-light;
+    color: $text-dark;
     position: fixed;
     width: 100%;
     z-index: 9999;
     padding-top: 20px;
     overflow: hidden;
     transition: all .5s ease-in;
-    top: -400px;
+    top: -420px;
 
 
-    app-input {
-        width: 80%;
-        display: inline-block;
+    .field {
+        width: 60%;
+        display: block;
+        margin: 0px auto;
     }
 
     &.open {
         top: 0px;
     }
 
-    .checkboxes {
+    .buttons {
         margin-bottom: 10px;
 
-        input {
-            margin-left: 7px;
+        mat-button-toggle {
+            background-color: $accent-light;
         }
-        label {
-            margin-right: 7px;
+        .mat-button-toggle-checked {
+            background-color: $accent-dark;
         }
     }
 
     .guests {
-        width: 40%;
+        width: 30%;
+        display: inline-block;
     }
 
     .cta {
-        margin-bottom: 20px
+        margin-top: 17px;
+        margin-bottom: 20px;
     }
 
-    .check-heart {
-        width: 20px;
+    .mat-form-field-label {
+        color: red;
+    }
+
+    .close-btn {
+        position: fixed;
+        right: 13px;
+        top: 11px;
+        transform: scale(2, 1.3);
+        cursor: pointer;
     }
 }
 
 .hero {
     padding-top: ($header-height + 100px);
     padding-bottom: 100px;
-    color: $brown;
+    color: $text-dark;
     min-height: 400px;
-    background-color: $gray;
+    background-color: $backdrop-light;
 
     .background0, .background1 {
         position: absolute;
@@ -95,13 +89,13 @@
         z-index: 0;
     }
     .background0 {
-        // background-image: url('../../assets/backgrounds/clownfish_before.jpg');
+        background-image: url('../../assets/backgrounds/faces1.jpg');
         opacity: .5;
         @media only screen and (min-width: $desktop-width) {
         }
     }
     .background1 {
-        // background-image: url('../../assets/backgrounds/clownfish_after.jpg');
+        background-image: url('../../assets/backgrounds/faces2.jpg');
         opacity: 0;
         @media only screen and (min-width: $desktop-width) {
         }
@@ -119,26 +113,38 @@
     .invite {
         font-weight: 900;
         margin-top: 32px;
-        font-size: 80px;
+        font-size: 63px;
         transform: scale(1, 2.6);
+        @media only screen and (min-width: $desktop-width) {
+            font-size: 80px;
+        }
     }
     .wedding {
         letter-spacing: 11px;
-        font-size: 28px;
+        font-size: 18px;
         margin-top: 43px;
         margin-left: 7px;
+        @media only screen and (min-width: $desktop-width) {
+            font-size: 28px;
+        }
     }
     .cele {
         font-weight: 900;
-        font-size: 65px;
+        font-size: 53px;
         transform: scale(1, 2.1);
         margin-top: 16px;
+        @media only screen and (min-width: $desktop-width) {
+            font-size: 65px;
+        }
     }
     .date {
         letter-spacing: 14px;
-        font-size: 42px;
+        font-size: 29px;
         margin-top: 20px;
         margin-left: 18px;
+        @media only screen and (min-width: $desktop-width) {
+            font-size: 42px;
+        }
     }
 
     .cta {
@@ -159,8 +165,8 @@
 .about {
     padding-top: 35px;
     padding-bottom: 0px;
-    background-color: $logo-blue;
-    color: $gray;
+    background-color: $primary-dark;
+    color: $text-light;
 
     @media only screen and (min-width: $desktop-width) {
         padding-top: 60px;
@@ -168,50 +174,66 @@
     }
 
     .abouts {
-        width: 40%;
+        width: 90%;
         display: inline-block;
-        margin: auto 20px;
         text-align: justify;
+        vertical-align: top;
 
         h3 {
             text-align: center;
         }
 
         @media only screen and (min-width: $desktop-width) {
-
+            width: 40%;
+            margin: auto 20px;
         }
     }
 
     .beating-heart {
         width: 200px;
+        border-radius: 9999px;
+        margin-bottom: 30px;
+        margin-top: 20px;
+
+        @media only screen and (min-width: $desktop-width) {
+            margin-bottom: 0px;
+        }
     }
 }
 
 .photos {
-    color: $brown;
-    background-color: $scheme-gray;
-    padding-bottom: 200px;
+    color: $text-dark;
+    background-color: $primary;
+    padding-bottom: 50px;
     padding-top: 1px;
 
     @media only screen and (min-width: $desktop-width) {
         padding-bottom: 100px;
     }
 
-    h1 {
+    .header {
         margin-top: 40px;
-        margin-bottom: 48px;
+        margin-bottom: 0px;
 
         @media only screen and (min-width: $desktop-width) {
             margin-bottom: 10px;
         }
     }
-
+    .breaker {
+        margin-bottom: 20px;
+    }
 }
 
 .details {
-    color: $brown;
+    color: $text-dark;
     padding-top: 10px;
     padding-bottom: 40px;
+
+    a {
+        color: $primary-dark;
+        font-weight: 900;
+        text-decoration: underline;
+    }
 
     &::after {
         background-image: url('../../assets/backgrounds/cherry.jpg');
@@ -246,8 +268,11 @@
         background: rgba(255,255,255,.8);
         border-radius: 4px;
         margin: auto;
-        border-top: 10px solid $scheme-gray;
-        padding-bottom: 30px;
+        border-top: 10px solid $primary;
         margin-bottom: 20px
+    }
+
+    .donation-list {
+        display: inline-block;
     }
 }

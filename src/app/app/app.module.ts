@@ -5,15 +5,21 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule, Routes, Router, NavigationEnd } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { NgxLogglyModule } from 'ngx-loggly-logger';
-import { NgxCarouselModule } from 'ngx-carousel';
+import { NguCarouselModule } from '@ngu/carousel';
 import 'hammerjs';
+
+import { AngularFireFunctionsModule } from 'angularfire2/functions';
+import { AngularFireModule } from 'angularfire2';
+
+import { MatButtonToggleModule, MatFormFieldModule, MatInputModule, MatCardModule,
+         ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from '../home/home.component';
 import { JapanComponent } from '../japan/japan.component';
 import { ErrorComponent } from '../error/error.component';
+import { AdminComponent } from '../admin/admin.component';
 
 
 import { CarouselComponent } from '../../components/carousel/carousel.component';
@@ -25,10 +31,8 @@ import { DashboardService } from '../../factories/dashboard.service';
 import { StorageService } from '../../factories/storage.service';
 import { GlobalErrorHandler, LogglyLoggerService } from '../../core/error';
 import { RouterService } from '../../core/router';
-import { ScrollService } from '../../components/inViewport/scroll.service';
 
 import { AnalyticsService, AnalyticsDirective } from '../../core/analytics';
-import { AnimateOnScrollDirective } from '../../components/inViewport/animate-on-scroll.directive';
 import { environment } from '../../environments/environment';
 
 declare let ga: Function;
@@ -38,13 +42,13 @@ declare let ga: Function;
         HomeComponent,
         JapanComponent,
         ErrorComponent,
+        AdminComponent,
 
         CarouselComponent,
         HeaderComponent,
         FooterComponent,
         AppInputComponent,
         AnalyticsDirective,
-        AnimateOnScrollDirective
     ],
     imports: [
         BrowserModule,
@@ -53,26 +57,35 @@ declare let ga: Function;
         ReactiveFormsModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(
-          RouterService.getRoutes(),
-          { errorHandler: null }
-          // { enableTracing: true } // <-- debugging purposes only
+            RouterService.getRoutes(),
+            { errorHandler: null }
+            // { enableTracing: true } // <-- debugging purposes only
         ),
-        NgxCarouselModule,
+        NguCarouselModule,
         NgxLogglyModule.forRoot(),
-        RecaptchaModule.forRoot()
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireFunctionsModule,
+        MatButtonToggleModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule,
+        MatTableModule
     ],
     providers: [
         RouterService,
 
         DashboardService,
         StorageService,
-        ScrollService,
 
         LogglyLoggerService,
         AnalyticsService,
         {
             provide: ErrorHandler,
             useClass: GlobalErrorHandler
+        },
+        {
+            provide: ErrorStateMatcher,
+            useClass: ShowOnDirtyErrorStateMatcher
         }
     ],
     bootstrap: [AppComponent]

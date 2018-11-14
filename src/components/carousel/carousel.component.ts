@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxCarousel, NgxCarouselStore } from 'ngx-carousel';
+import { NguCarousel, NguCarouselStore } from '@ngu/carousel';
 
 import { AnalyticsService } from '../../core/analytics';
 
@@ -11,7 +11,7 @@ import { AnalyticsService } from '../../core/analytics';
 })
 export class CarouselComponent implements OnInit {
 
-    public carouselBanner: NgxCarousel;
+    public carouselBanner: NguCarousel;
     public carouselTileItems;
 
     constructor(private analyticsService: AnalyticsService) {}
@@ -21,8 +21,8 @@ export class CarouselComponent implements OnInit {
         this.carouselTileItems = [
             {
                 // title: 'Battery Project',
-                // body: `Company X is developing a new type of battery that is 2x cheaper than 
-                //         the state of the art in lithium ion battery technology. This tech, if 
+                // body: `Company X is developing a new type of battery that is 2x cheaper than
+                //         the state of the art in lithium ion battery technology. This tech, if
                 //         developed fully, can make energy storage systems affordable for most
                 //         homes and businesses, helping them save money and reduce electricity waste.`,
                 src: '../assets/photos/1.jpg'
@@ -48,24 +48,24 @@ export class CarouselComponent implements OnInit {
             point: {
                 visible: true,
                 pointStyles: `
-                    .ngxcarousel {
+                    .ngucarousel {
                         width: 80%;
                         margin: auto;
                     }
-                    .ngxcarouselPoint {
+                    .ngucarouselPoint {
                         margin: 0;
                         padding: 0;
                         box-sizing: border-box;
                     }
-                    .ngxcarouselPoint li {
+                    .ngucarouselPoint li {
                         display: inline-block;
-                        background: #8860d0;
+                        background: #ec4482;
                         border-radius: 999px;
                         padding: 5px;
                         margin: 0 3px;
                         transition: .4s ease all;
                     }
-                    .ngxcarouselPoint li.active {
+                    .ngucarouselPoint li.active {
                         border: 2px solid white;
                         top: 2px;
                         position: relative;
@@ -85,7 +85,7 @@ export class CarouselComponent implements OnInit {
     }
 
     /* It will be triggered on every slide */
-    onmoveFn(data: NgxCarouselStore) {
+    onmoveFn(data: NguCarouselStore) {
         this.analyticsService.emitEvent('Home', 'Move', 'Carousel Slide', data.currentSlide);
     }
 

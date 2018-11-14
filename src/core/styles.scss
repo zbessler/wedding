@@ -1,15 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@include mat-core();
 @import 'vars';
+
 
 body, app-root {
     margin: 0;
     padding: 0;
-    background-color: $gray;
-    color: $brown;
+    background-color: $backdrop-light;
+    color: $text-dark;
     text-align: center;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     -webkit-overflow-scrolling: touch;
+    @include angular-material-theme($my-theme);
 
 }
 
@@ -21,7 +25,7 @@ h1, h2, h3 {
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: $text-light;
 }
 
 .link {
@@ -57,23 +61,23 @@ a {
 
 
 .cta {
-    background-color: $scheme-purple;
+    background-color: $accent-dark;
     font-size: 25px;
     border-radius: 7px;
     padding: 10px 30px;
     cursor: pointer;
     border: none;
-    color: $brown;
+    color: $text-dark;
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
     font-weight: 300;
 
     &:hover {
-        background-color: lighten($scheme-purple, 10%)
+        background-color: $accent;
     }
 
     &:active {
-        background-color: lighten($scheme-purple, 5%)
+        background-color: $accent-light;
     }
 
     &.small {
@@ -85,14 +89,15 @@ a {
         border-radius: 9999px;
         font-size: 9px;
         padding: 0px 5px;
-        background-color: $gray;
+        background-color: $backdrop-light;
     }
 }
 
 .validator-error {
     color: #ff6363;
-    font-size: 10px;
-    margin: 2px auto -14px auto;
+    font-size: 75%;
+    font-weight: 900;
+    margin: -3px auto -12px auto;
 }
 
 .panel {
@@ -121,7 +126,7 @@ a {
     }
 
     .accordion-bar {
-        background-color: $green;
+        background-color: $primary;
         width: 100%;
         padding: 10px 0px;
         position: relative;
@@ -155,9 +160,29 @@ a {
     }
 }
 
+.breaker {
+    .heart {
+        width: 30px;
+    }
+    .line {
+        height: 2px;
+        border-top: 1px solid $text-dark;
+        border-bottom: 1px solid $text-dark;
+        display: inline-block;
+        width: 100px;
+        margin-bottom: 10px;
+
+        &.long {
+            display: inline-block;
+            width: 250px;
+            margin-top: 15px
+        }
+    }
+}
+
 
 .form-table {
-    border-top: 10px solid $green;
+    border-top: 10px solid $primary;
     background-color: #fff;
     padding-bottom: 30px;
     width: 90%;
@@ -201,3 +226,5 @@ a {
         }
     }
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }

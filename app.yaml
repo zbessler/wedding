@@ -6,13 +6,13 @@ service: default
 threadsafe: yes
 
 automatic_scaling:
-  min_idle_instances: 1
+  min_idle_instances: 0
 
 handlers:
 
-- url: /(.*\.(css|eot|gz|html|ico|js|map|png|jpg|jpeg|svg|ttf|woff|woff2|pdf))
+- url: /(.*\.(css|eot|gz|html|ico|js|map|png|jpg|jpeg|svg|ttf|woff|woff2|pdf|gif))
   static_files: dist/\1
-  upload: dist/(.*\.(css|eot|gz|html|ico|js|map|png|jpg|jpeg|svg|ttf|woff|woff2|pdf))
+  upload: dist/(.*\.(css|eot|gz|html|ico|js|map|png|jpg|jpeg|svg|ttf|woff|woff2|pdf|gif))
 
 - url: /.*
   static_files: dist/index.html
@@ -22,7 +22,13 @@ handlers:
 
 # Temporary setting to keep gcloud from uploading not required files for deployment
 skip_files:
-- ^node_modules$
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+- firebase/
+- node_modules/
 - ^app\.yaml
 - ^app-qa\.yaml
 - ^README\..*

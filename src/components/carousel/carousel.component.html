@@ -1,18 +1,18 @@
-<ngx-carousel
+<ngu-carousel
     [inputs]="carouselBanner"
     (onMove)="onmoveFn($event)"
     (afterCarouselViewed)="afterCarouselViewedFn($event)">
 
-        <ngx-tile NgxCarouselItem *ngFor="let Tile of carouselTileItems">
+        <ngu-tile NguCarouselItem *ngFor="let Tile of carouselTileItems">
 
             <img class="img" src="{{Tile.src}}" />
             <!-- <div class="content">
                 <h1 class="title">{{Tile.title}}</h1>
                 <div class="body">{{Tile.body}}</div>
             </div> -->
-        </ngx-tile>
-        <div appAnalytics="Home|Click|Carousel Left" NgxCarouselPrev class="leftRs"></div>
-        <div appAnalytics="Home|Click|Carousel Right" NgxCarouselNext class="rightRs"></div>
-        <!-- <img appAnalytics="Home|Click|Carousel Right" NgxCarouselNext class="rightRs" src="/assets/left-arrow_green.png" /> -->
-        <!-- <img appAnalytics="Home|Click|Carousel Left" NgxCarouselPrev class="leftRs" src="/assets/left-arrow_green.png" /> -->
-</ngx-carousel>
+        </ngu-tile>
+        <div appAnalytics="Home|Click|Carousel Left" NguCarouselPrev class="leftRs"></div>
+        <div appAnalytics="Home|Click|Carousel Right" NguCarouselNext class="rightRs"></div>
+        <!-- <img appAnalytics="Home|Click|Carousel Right" NguCarouselNext class="rightRs" src="/assets/left-arrow_green.png" /> -->
+        <!-- <img appAnalytics="Home|Click|Carousel Left" NguCarouselPrev class="leftRs" src="/assets/left-arrow_green.png" /> -->
+</ngu-carousel>

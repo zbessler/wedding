@@ -1,7 +1,8 @@
 @import '../../core/vars';
 
 .leftRs, .rightRs {
-    display: none !important;
+    // display: none !important;
+    display: inline-block !important;
     cursor: pointer;
     top: 0;
     bottom: 0;
@@ -13,43 +14,43 @@
     left: 50px;
     border-top: 30px solid transparent;
     border-bottom: 30px solid transparent;
-    border-right: 30px solid $scheme-purple;
+    border-right: 30px solid $accent-dark;
 
     &:hover {
-        border-right: 30px solid lighten($scheme-purple, 10%);
+        border-right: 30px solid $accent-light;
     }
 }
 
 .rightRs {
     border-top: 30px solid transparent;
     border-bottom: 30px solid transparent;
-    border-left: 30px solid $scheme-purple;
+    border-left: 30px solid $accent-dark;
     right: 50px;
 
     &:hover {
-        border-left: 30px solid lighten($scheme-purple, 10%);
+        border-left: 30px solid $accent-light;
     }
 }
 
-@media only screen and (min-width: 700px) {
-    .rightRs, .leftRs {
-        display: inline-block !important;
-    }
-}
-
-.ngxcarousel {
-    width: 70%;
+.ngucarousel {
+    width: 100%;
     margin: auto;
+    @media only screen and (min-width: 700px) {
+        width: 70%;
+    }
 }
 
 
-ngx-tile /deep/ {
+ngu-tile /deep/ {
 
     text-align: center;
     width: 100%;
 
     img {
-        width: 75%;
+        width: 100%;
+        @media only screen and (min-width: 700px) {
+            width: 75%;
+        }
     }
     .tile {
         box-shadow: none;

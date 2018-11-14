@@ -2,9 +2,9 @@ import { Component, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 
-import { fill as lofill } from 'lodash/fill';
+import { AngularFireFunctions } from 'angularfire2/functions';
 
-import { DashboardService } from '../../factories/dashboard.service';
+import { StorageService } from '../../factories/storage.service';
 
 @Component({
     templateUrl: './home.component.html',
@@ -17,7 +17,7 @@ export class HomeComponent {
 
     public rsvpForm: FormGroup;
     public rsvpText = 'Send RSVP';
-    public openState = 'open';
+    public openState = false;
 
     private scollNum = 0;
     public scrollType = 'base';
@@ -28,40 +28,90 @@ export class HomeComponent {
 
 
 
-
-    @ViewChild('fundingDiv') fundingDiv: ElementRef;
-    @ViewChild('peopleContainer') peopleContainer: ElementRef;
-
     constructor(
-        private el: ElementRef,
         private fb: FormBuilder,
-        private dashboardService: DashboardService,
+        private fun: AngularFireFunctions,
+        private storage: StorageService
     ) {
+
         this.rsvpForm = fb.group({
-            attJapan: [null, []],
-            attMaine: [null, []],
-            attWis: [null, []],
+            attending: [null, [Validators.required]],
             name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
             email: [null, [Validators.required, Validators.email]],
-            adultGuests: [null, [Validators.maxLength(50)]],
-            childGuests: [null, [Validators.min(0), Validators.max(6)]],
+            adults: [null, [Validators.required, Validators.min(1), Validators.max(6), Validators.pattern('[0-9]*')]],
+            children: [null, [Validators.min(0), Validators.max(6), Validators.pattern('[0-9]*')]],
         }, { });
 
-    }
-
-
-    // The normal email validator forced a value to be entered.
-    // This accepts an empty email field
-    private customEmailValidator(control: AbstractControl): ValidationErrors {
-        if (!control.value) {
-            return null;
+        const savedData = this.storage.getStorage('rsvp-data');
+        if (savedData) {
+            this.rsvpForm.get('name').setValue(savedData.name);
+            this.rsvpForm.get('email').setValue(savedData.email);
+            this.rsvpForm.get('adults').setValue(savedData.adults);
+            this.rsvpForm.get('children').setValue(savedData.children);
+            this.rsvpForm.get('attending').setValue(savedData.attending);
+            this.rsvpText = 'Update RSVP';
         }
 
-        return Validators.email(control);
     }
 
-    public setRsvpState(newState: string): void {
-        this.openState = newState;
+    public sendForm() {
+        let formErrors = false;
+        (<any>Object).values(this.rsvpForm.controls).forEach(c => {
+            c.markAsDirty();
+            if (c.errors) {
+                formErrors = true;
+                return ;
+            }
+        });
+        if (formErrors) {
+            this.rsvpText = 'Try Again';
+            return ;
+        }
+        this.rsvpText = 'Sending...';
+
+
+        const guestData = {
+            name: this.rsvpForm.get('name').value,
+            email: this.rsvpForm.get('email').value,
+            adults: this.rsvpForm.get('adults').value,
+            children: this.rsvpForm.get('children').value,
+            attending: this.rsvpForm.get('attending').value
+        };
+        if (!guestData.children) {
+            guestData.children = 0;
+        }
+        console.log('sending this', guestData);
+        this.storage.setStorage('rsvp-data', guestData);
+
+        const res = this.fun
+            .httpsCallable('addGuest')(guestData)
+            .toPromise()
+            .then(out => {
+                this.toggleRsvp();
+                this.rsvpText = 'RSVP Received';
+                console.log(out);
+            })
+            .catch(err => {
+                console.log('err', err);
+                this.rsvpText = 'Error: try again later';
+            });
+    }
+
+    public getSummary() {
+        const res = this.fun
+            .httpsCallable('getSummary')(null)
+            .toPromise()
+            .then(out => {
+                console.log(out);
+            })
+            .catch(err => {
+                console.log('err', err);
+            });
+    }
+
+
+    public toggleRsvp(): void {
+        this.openState = !this.openState;
     }
 
     //

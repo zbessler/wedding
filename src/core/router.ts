@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from '../app/home/home.component';
 import { JapanComponent } from '../app/japan/japan.component';
 import { ErrorComponent } from '../app/error/error.component';
+import { AdminComponent } from '../app/admin/admin.component';
 
 
 @Injectable()
@@ -13,6 +14,7 @@ export class RouterService {
         return [
             { path: '', component: HomeComponent, pathMatch: 'full' },
             { path: 'japan', component: JapanComponent, pathMatch: 'full' },
+            { path: 'love', component: AdminComponent, pathMatch: 'full' },
             { path: '**', component: ErrorComponent } // @Todo change to 404 page
         ];
     }
